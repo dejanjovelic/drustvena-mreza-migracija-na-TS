@@ -60,6 +60,10 @@ function renderData(): void {
                 edtitBtn.textContent = "Edit";
                 edtitBtn.classList.add("buttons");
 
+                edtitBtn.onclick = function () {
+                    window.location.href = "../usersFrom/usersFrom.html?id=" + user.id
+                }
+
 
                 const deleteBtn = document.createElement("button");
                 deleteBtn.textContent = "Delete";
@@ -73,7 +77,7 @@ function renderData(): void {
                 userContainer.appendChild(userCard);
 
                 const addBtn = (document.querySelector("#addButton") as HTMLElement)
-                addBtn.onclick = function(){
+                addBtn.onclick = function () {
                     window.location.href = '../usersFrom/usersFrom.html';
                 }
 
