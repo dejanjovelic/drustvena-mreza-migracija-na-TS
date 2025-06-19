@@ -72,6 +72,11 @@ function renderData(): void {
 
                 userContainer.appendChild(userCard);
 
+                const addBtn = (document.querySelector("#addButton") as HTMLElement)
+                addBtn.onclick = function(){
+                    window.location.href = '../usersFrom/usersFrom.html';
+                }
+
             }
         })
         .catch(error => {

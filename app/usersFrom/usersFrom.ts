@@ -1,0 +1,65 @@
+import { UserFormData } from "../model/userFormData.model.js";
+import { UserService } from "../services/user.services.js";
+
+
+const userService = new UserService();
+
+function submit(): void {
+    const username = (document.querySelector('#username') as HTMLInputElement).value;
+    const name = (document.querySelector('#name') as HTMLInputElement).value;
+    const surname = (document.querySelector('#surname') as HTMLInputElement).value;
+    const birthday = new Date((document.querySelector('#birthday') as HTMLInputElement).value);
+
+
+    if (!username || !name || !surname || !birthday || !(birthday instanceof Date)) {
+        alert('All fileds are required!')
+        return
+    }
+
+    const formData: UserFormData = { username, name, surname, birthday }
+
+    const usernameErrorMessage = document.querySelector('#usernameErrorMessage');
+    usernameErrorMessage.textContent = "";
+
+    const nameErrorMessage = document.querySelector('#nameErrorMessage');
+    nameErrorMessage.textContent = "";
+
+    const surnameErrorMessage = document.querySelector('#surnameErrorMessage');
+    surnameErrorMessage.textContent = "";
+
+    const birthdaynameErrorMessage = document.querySelector('#birthdayErrorMessage');
+    birthdaynameErrorMessage.textContent = "";
+
+    if (formData.username.trim() === "") {
+        usernameErrorMessage.textContent = "Username field is required!"
+        
+    }
+    if (formData.name.trim() === "") {
+        nameErrorMessage.textContent = "Name field is required!"
+        
+    }
+    if (formData.surname.trim() === "") {
+        surnameErrorMessage.textContent = "Surname field is required!"
+        
+    }
+    if (formData.birthday.toDateString() === "") {
+        nameErrorMessage.textContent = "Birthday field is required!"
+        return
+    }
+
+
+    userService.create(formData)
+        .then(() => {
+            window.location.href = "../users/user.html";
+        })
+        .catch(error => {
+            console.log(`Error: `, error.status);
+        })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const submitBtn = document.querySelector('#submitBtn')
+    submitBtn.addEventListener('click', submit)
+});
+
