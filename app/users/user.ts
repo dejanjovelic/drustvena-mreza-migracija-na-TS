@@ -64,10 +64,19 @@ function renderData(): void {
                     window.location.href = "../usersFrom/usersFrom.html?id=" + user.id
                 }
 
-
                 const deleteBtn = document.createElement("button");
                 deleteBtn.textContent = "Delete";
                 deleteBtn.classList.add("buttons");
+
+                deleteBtn.onclick = function () {
+                    userService.delete(user.id.toString())
+                        .then(() => {
+                            window.location.reload()
+                        })
+                        .catch(error => {
+                            console.log(`Error: `, error.status)
+                        });
+                }
 
                 buttonDiv.appendChild(edtitBtn)
                 buttonDiv.appendChild(deleteBtn)
