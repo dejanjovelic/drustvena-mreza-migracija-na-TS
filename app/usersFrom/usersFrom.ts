@@ -26,14 +26,21 @@ function intitalizationForm(): void {
 const userService = new UserService();
 
 function submit(): void {
+    const submitBtn = document.querySelector('#submitBtn') as HTMLButtonElement;
+
+    // submitBtn.disabled = true;
+    // showSpinner()
+
+
     const username = (document.querySelector('#username') as HTMLInputElement).value;
     const name = (document.querySelector('#name') as HTMLInputElement).value;
     const surname = (document.querySelector('#surname') as HTMLInputElement).value;
     const birthday = new Date((document.querySelector('#birthday') as HTMLInputElement).value);
 
-
     if (!username || !name || !surname || !birthday || !(birthday instanceof Date)) {
         alert('All fileds are required!')
+        submitBtn.disabled = false;
+        hideSpinner()
         return
     }
 
@@ -72,36 +79,56 @@ function submit(): void {
     const id = urlParams.get('id');
 
     if (id) {
-
+        showSpinner()
+        submitBtn.disabled = true;
         userService.update(id, formData)
             .then(() => {
+                hideSpinner()
+                submitBtn.disabled = false;
                 window.location.href = "../users/user.html";
             })
             .catch(error => {
-                console.log(`Error: `, error.status);
+                HandleError(error);
             })
 
     } else {
+        showSpinner()
+        submitBtn.disabled = true;
         userService.create(formData)
             .then(() => {
+                hideSpinner()
+                submitBtn.disabled = false;
                 window.location.href = "../users/user.html";
             })
             .catch(error => {
-                console.log(`Error: `, error.status);
+                HandleError(error);
             })
     }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     intitalizationForm();
     const submitBtn = document.querySelector('#submitBtn') as HTMLButtonElement;
     submitBtn.addEventListener('click', () => {
-        setTimeout(() => {
-            submit()
-        }, 2000)
-
-        submitBtn.disabled = true;
+        submit()
     })
 });
+
+
+function showSpinner() {
+    const spinner = document.querySelector('#spinner') as HTMLDivElement
+    spinner.classList.remove('hidden');
+}
+
+function hideSpinner() {
+    const spinner = document.querySelector('#spinner') as HTMLDivElement
+    spinner.classList.add('hidden');
+}
+
+function HandleError(error) {
+    hideSpinner()
+    alert(`Error: ${error.status}`)
+    const submitBtn = document.querySelector('#submitBtn') as HTMLButtonElement;
+    submitBtn.disabled = false;
+}
 
