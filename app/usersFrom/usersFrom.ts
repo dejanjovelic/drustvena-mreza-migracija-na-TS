@@ -95,7 +95,13 @@ function submit(): void {
 
 document.addEventListener('DOMContentLoaded', () => {
     intitalizationForm();
-    const submitBtn = document.querySelector('#submitBtn')
-    submitBtn.addEventListener('click', submit)
+    const submitBtn = document.querySelector('#submitBtn') as HTMLButtonElement;
+    submitBtn.addEventListener('click', () => {
+        setTimeout(() => {
+            submit()
+        }, 2000)
+
+        submitBtn.disabled = true;
+    })
 });
 

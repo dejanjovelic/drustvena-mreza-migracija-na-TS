@@ -25,21 +25,21 @@ export class UserService {
             })
     }
 
-    getById(id: string):Promise<User>{
+    getById(id: string): Promise<User> {
         return fetch(`${this.apiUrl}/${id}`)
-        .then(response =>{
-           if(!response.ok){
-            throw {status: response.status, message: response.text}
-           }
-           return response.json();
-        })
-        .then((user: User)=>{
-            return user;
-        })
-        .catch(error =>{
-            console.log(`Error: `, error.status)
-            throw error;
-        })
+            .then(response => {
+                if (!response.ok) {
+                    throw { status: response.status, message: response.text }
+                }
+                return response.json();
+            })
+            .then((user: User) => {
+                return user;
+            })
+            .catch(error => {
+                console.log(`Error: `, error.status)
+                throw error;
+            })
     }
 
     create(formData: UserFormData): Promise<User> {
@@ -48,50 +48,50 @@ export class UserService {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
-        .then(response=>{
-            if(!response.ok){
-                throw {status: response.status, message: response.text}
-            }
-            return response.json();
-        })
-        .catch(error=>{
-            console.log(`Error: `, error.status)
-            throw error;
-        })
+            .then(response => {
+                if (!response.ok) {
+                    throw { status: response.status, message: response.text }
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.log(`Error: `, error.status)
+                throw error;
+            })
     }
 
-    update(id: string, formData: UserFormData): Promise<User>{
+    update(id: string, formData: UserFormData): Promise<User> {
         return fetch(`${this.apiUrl}/${id}`, {
-            method:'PUT',
-            headers:{'Content-Type':'application/json'},
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
-        .then(response=>{
-            if(!response.ok){
-                throw {status: response.status, message: response.text}
-            }
-            return response.json();
-        })
-        .then((user: User)=>{
-            return user;
-        })
-        .catch(error=>{
-            console.log(`Error: `, error.status)
-            throw error;
-        })
+            .then(response => {
+                if (!response.ok) {
+                    throw { status: response.status, message: response.text }
+                }
+                return response.json();
+            })
+            .then((user: User) => {
+                return user;
+            })
+            .catch(error => {
+                console.log(`Error: `, error.status)
+                throw error;
+            })
     }
 
-    delete(id: string): Promise<void>{
-        return fetch(`${this.apiUrl}/${id}`, {method:'DELETE'})
-        .then(response=>{
-            if(!response.ok){
-                throw {status: response.status, message: response.text}
-            }
-        })
-        .catch(error=>{
-            console.log(`Error: `, error.status)
-            return error;
-        });
+    delete(id: string): Promise<void> {
+        return fetch(`${this.apiUrl}/${id}`, { method: 'DELETE' })
+            .then(response => {
+                if (!response.ok) {
+                    throw { status: response.status, message: response.text }
+                }
+            })
+            .catch(error => {
+                console.log(`Error: `, error.status)
+                return error;
+            });
     }
 
 }

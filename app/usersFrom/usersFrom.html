@@ -19,31 +19,34 @@
     </nav>
 
     <h1 id="form-header"></h1>
-<div id="form-container">
-    <form id="form">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
-        <span id="usernameErrorMessage"></span>
-        <br>
-      
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
-        <span id="nameErrorMessage"></span>
-        <br>
-   
-        <label for="surname">Surname:</label>
-        <input type="text" name="surname" id="surname" required>
-        <span id="surnameErrorMessage"></span>
-        <br>
+    <div id="form-container">
+        <form id="form">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <span calss="error-span" id="usernameErrorMessage"></span>
+            <br>
 
-        <label for="birthday">Birthday:</label>
-        <input type="date" name="birthday" id="birthday" required>
-        <span id="birthdayErrorMessage"></span>
-        <br>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+            <span calss="error-span" id="nameErrorMessage"></span>
+            <br>
 
-        <button id="submitBtn" type="button">Submit</button>
-    </form>
-</div>
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname" id="surname" required>
+            <span calss="error-span" id="surnameErrorMessage"></span>
+            <br>
+
+            <label for="birthday">Birthday:</label>
+            <input type="date" name="birthday" id="birthday" required>
+            <span calss="error-span" id="birthdayErrorMessage"></span>
+            <br>
+            <div id="tooltip">
+                <button id="submitBtn" type="button">Submit</button>
+                <span class="tooltiptext">Create/Update user</span>
+            </div>
+
+        </form>
+    </div>
 
 </body>
 
